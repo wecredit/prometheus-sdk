@@ -1,0 +1,108 @@
+{
+    "annotations": { "list": [] },
+    "editable": true,
+    "gnetId": null,
+    "id": null,
+    "panels": [
+      {
+        "type": "stat",
+        "title": "Total Info Events (All Projects)",
+        "targets": [
+          {
+            "expr": "sum(info_events_total{project=~\"$project\", event=~\"$event\"})",
+            "refId": "A"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 0, "w": 6, "h": 4 }
+      },
+      {
+        "type": "stat",
+        "title": "Total Error Events (All Projects)",
+        "targets": [
+          {
+            "expr": "sum(error_events_total{project=~\"$project\", error_type=~\"$error_type\"})",
+            "refId": "B"
+          }
+        ],
+        "gridPos": { "x": 6, "y": 0, "w": 6, "h": 4 }
+      },
+      {
+        "type": "graph",
+        "title": "Error Events Rate by Type",
+        "targets": [
+          {
+            "expr": "rate(error_events_total{project=~\"$project\", error_type=~\"$error_type\"}[1m])",
+            "legendFormat": "{{error_type}}",
+            "refId": "C"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 4, "w": 12, "h": 8 }
+      },
+      {
+        "type": "table",
+        "title": "Info Events by Project & Event",
+        "targets": [
+          {
+            "expr": "info_events_total{project=~\"$project\", event=~\"$event\"}",
+            "format": "table",
+            "refId": "D"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 12, "w": 12, "h": 8 }
+      }
+    ],
+    "refresh": "5s",
+    "schemaVersion": 38,
+    "templating": {
+      "list": [
+        {
+          "name": "project",
+          "label": "Project",
+          "type": "query",
+          "datasource": "Prometheus",
+          "query": "label_values(info_events_total, project)",
+          "includeAll": true,
+          "multi": false,
+          "refresh": 1,
+          "current": {
+            "text": "All",
+            "value": ".*",
+            "selected": true
+          }
+        },
+        {
+          "name": "event",
+          "label": "Info Event Type",
+          "type": "query",
+          "datasource": "Prometheus",
+          "query": "label_values(info_events_total, event)",
+          "includeAll": true,
+          "multi": false,
+          "refresh": 1,
+          "current": {
+            "text": "All",
+            "value": ".*",
+            "selected": true
+          }
+        },
+        {
+          "name": "error_type",
+          "label": "Error Type",
+          "type": "query",
+          "datasource": "Prometheus",
+          "query": "label_values(error_events_total, error_type)",
+          "includeAll": true,
+          "multi": false,
+          "refresh": 1,
+          "current": {
+            "text": "All",
+            "value": ".*",
+            "selected": true
+          }
+        }
+      ]
+    },
+    "title": "Prometheus SDK Dashboard",
+    "version": 2
+  }
+  

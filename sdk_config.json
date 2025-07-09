@@ -1,0 +1,13 @@
+{
+    "metricsPort": "2112",
+    "alertEmail": {
+      "enable": true,
+      "smtpHost": "smtp.office365.com",
+      "smtpPort": "587",
+      "username": "alerts@yourorg.com",
+      "password": "your-app-password",
+      "from": "alerts@yourorg.com",
+      "to": ["devops@yourorg.com", "alerts@yourorg.com"]
+    }
+  }
+  
