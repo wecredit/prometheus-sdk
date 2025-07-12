@@ -25,7 +25,7 @@ var (
 )
 
 func main() {
-	fmt.Println("🚀 Testing Prometheus SDK Locally with Simulated Logs")
+	fmt.Println("Testing Prometheus SDK Locally with Simulated Logs")
 
 	healthCheck()
 
@@ -44,11 +44,11 @@ func main() {
 	// View raw /metrics output (just first few lines)
 	printMetrics()
 
-	fmt.Println("🎯 Done. Now visit http://localhost:9090 to query.")
-	fmt.Println("\n👉 Example Prometheus queries:")
-	fmt.Printf("🔹 Total info for project:\n    info_events_total{project=\"%s\"}\n", project)
-	fmt.Printf("🔹 Info for specific event:\n    info_events_total{project=\"%s\",event=\"job_dispatched\"}\n", project)
-	fmt.Printf("🔹 Errors by type:\n    error_events_total{project=\"%s\",error_type=\"db_timeout\"}\n", project)
+	fmt.Println("Done. Now visit http://localhost:9090 to query.")
+	fmt.Println("\nExample Prometheus queries:")
+	fmt.Printf("Total info for project:\n    info_events_total{project=\"%s\"}\n", project)
+	fmt.Printf("Info for specific event:\n    info_events_total{project=\"%s\",event=\"job_dispatched\"}\n", project)
+	fmt.Printf("Errors by type:\n    error_events_total{project=\"%s\",error_type=\"db_timeout\"}\n", project)
 }
 
 func healthCheck() {
@@ -97,7 +97,7 @@ func handleResponse(resp *http.Response, err error) {
 		fmt.Println("Invalid response:", string(body))
 		return
 	}
-	fmt.Printf("🔄 %s: %s\n\n", data.Status, data.Message)
+	fmt.Printf("%s: %s\n\n", data.Status, data.Message)
 }
 
 func min(a, b int) int {

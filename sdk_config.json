@@ -4,10 +4,10 @@
       "enable": true,
       "smtpHost": "smtp.office365.com",
       "smtpPort": "587",
-      "username": "alerts@yourorg.com",
-      "password": "your-app-password",
-      "from": "alerts@yourorg.com",
-      "to": ["devops@yourorg.com", "alerts@yourorg.com"]
+      "username": "prometheus.alert@wecredit.co.in",
+      "password": "Pr0MeTheU$@lerT@2025",
+      "from": "prometheus.alert@wecredit.co.in",
+      "to": ["techteam@wecredit.co.in"]
     }
   }
   
