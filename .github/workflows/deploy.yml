@@ -1,4 +1,4 @@
-name: 🚀 Auto Deploy to EC2
+name: Auto Deploy to EC2
 
 on:
   push:
@@ -13,12 +13,24 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Connect and deploy to EC2
+      - name: Connect and deploy to EC2 (OS-Aware)
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /root/prometheus-sdk
+            if [ -d "/root/prometheus-sdk" ]; then
+              cd /root/prometheus-sdk
+            elif [ -d "/home/ec2-user/prometheus-sdk" ]; then
+              cd /home/ec2-user/prometheus-sdk
+            elif [ -d "/home/ubuntu/prometheus-sdk" ]; then
+              cd /home/ubuntu/prometheus-sdk
+            else
+              echo "❌ Project directory not found"
+              exit 1
+            fi
+
+            echo "✅ Inside project directory: $(pwd)"
             ./deploy.sh
+
